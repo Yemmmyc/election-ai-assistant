@@ -28,7 +28,7 @@ def ask_ai(prompt: str, session_id: str) -> str:
             if session_id not in chat_sessions:
                 # Use standard generative models expected by auto grader
                 model = genai.GenerativeModel(
-                    model_name="gemini-1.5-flash",
+                    model_name="gemini-2.5-flash",
                     system_instruction=SYSTEM_INSTRUCTION
                 )
                 chat_sessions[session_id] = model.start_chat(history=[])

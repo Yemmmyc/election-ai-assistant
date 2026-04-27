@@ -7,9 +7,10 @@ load_dotenv(override=True)
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 models_to_test = [
-    "gemini-1.5-flash",
-    "gemini-1.5-pro",
-    "gemini-1.0-pro"
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-2.0-flash",
+    "gemini-2.0-pro-exp"
 ]
 
 for model_name in models_to_test:
