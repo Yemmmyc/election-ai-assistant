@@ -3,6 +3,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const userInput = document.getElementById("user-input");
     const chatArea = document.getElementById("chat-area");
     const sendButton = document.getElementById("send-button");
+    const clearChatBtn = document.getElementById("clear-chat");
+    
+    let sessionId = sessionStorage.getItem("naijaVoteSessionId") || null;
+
+    // Auto-resize textarea
+    userInput.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+        if(this.value === "") {
+            this.style.height = "auto";
+        }
+    });
+
+    // Handle Enter to send, Shift+Enter for new line
+    userInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            if (this.value.trim() !== "") {
+                chatForm.dispatchEvent(new Event("submit", {cancelable: true, bubbles: true}));
+            }
+        }
+    });
+
+    // Clear Chat functionality
+    if (clearChatBtn) {
+        clearChatBtn.addEventListener("click", () => {
+            sessionId = null;
+            sessionStorage.removeItem("naijaVoteSessionId");
+            
+            // Keep only the first bot message (intro)
+            const messages = chatArea.querySelectorAll(".message");
+            for (let i = 1; i < messages.length; i++) {
+                messages[i].remove();
+            }
+            
+            userInput.value = "";
+            userInput.style.height = "auto";
+            userInput.focus();
+        });
+    }
 
     function scrollToBottom() {
         chatArea.scrollTop = chatArea.scrollHeight;
@@ -84,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userMsg = createMessageElement(text, "user");
         chatArea.appendChild(userMsg);
         userInput.value = "";
+        userInput.style.height = "auto"; // Reset height after sending
         
         // Disable input while waiting
         userInput.disabled = true;
@@ -98,11 +139,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ message: text })
+                body: JSON.stringify({ 
+                    message: text,
+                    session_id: sessionId
+                })
             });
 
             const data = await response.json();
             removeTypingIndicator();
+            
+            // Store the session ID returned from the server
+            if (data.session_id) {
+                sessionId = data.session_id;
+                sessionStorage.setItem("naijaVoteSessionId", sessionId);
+            }
             
             if (response.ok) {
                 const botMsg = createMessageElement(data.response, "bot");

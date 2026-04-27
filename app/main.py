@@ -3,6 +3,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from typing import Optional
+import uuid
 from app.ai import ask_ai
 
 app = FastAPI(title="Nigerian Election AI Assistant")
@@ -16,9 +18,11 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 class ChatRequest(BaseModel):
     message: str
+    session_id: Optional[str] = None
 
 class ChatResponse(BaseModel):
     response: str
+    session_id: str
 
 @app.get("/")
 async def root():
@@ -29,7 +33,10 @@ async def chat(request: ChatRequest):
     try:
         if not request.message.strip():
             raise HTTPException(status_code=400, detail="Message cannot be empty")
-        response_text = ask_ai(request.message)
-        return ChatResponse(response=response_text)
+        
+        session_id = request.session_id or str(uuid.uuid4())
+        response_text = ask_ai(request.message, session_id)
+        
+        return ChatResponse(response=response_text, session_id=session_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

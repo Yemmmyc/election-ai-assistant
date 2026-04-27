@@ -17,7 +17,8 @@
         <div class="chat-interface">
             <header class="header">
                 <div class="header-content">
-                    <div class="logo">
+                    <div class="header-top">
+                        <div class="logo">
                         <div class="logo-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00b86a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -27,7 +28,14 @@
                         </div>
                         <h1>NaijaVote AI</h1>
                     </div>
-                    <p class="subtitle">Your intelligent guide to Nigerian elections</p>
+                    <button type="button" id="clear-chat" class="clear-btn" aria-label="Clear chat history" title="Clear Chat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="subtitle">Your intelligent guide to Nigerian elections</p>
                 </div>
             </header>
 
@@ -44,7 +52,7 @@
 
             <footer class="input-area glass-panel">
                 <form id="chat-form" class="input-form">
-                    <input type="text" id="user-input" placeholder="Ask about voting in Nigeria..." autocomplete="off" required>
+                    <textarea id="user-input" rows="1" placeholder="Ask about voting in Nigeria..." required></textarea>
                     <button type="submit" id="send-button" class="send-btn" aria-label="Send message">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

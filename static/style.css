@@ -101,6 +101,32 @@ body {
     gap: 4px;
 }
 
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clear-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.clear-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -280,6 +306,12 @@ body {
     font-size: 1rem;
     font-family: inherit;
     outline: none;
+    resize: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-height: 120px;
+    overflow-y: auto;
+    line-height: 1.5;
 }
 
 #user-input::placeholder {
