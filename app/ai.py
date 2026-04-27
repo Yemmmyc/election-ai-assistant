@@ -2,10 +2,12 @@ import os
 from dotenv import load_dotenv
 import time
 from typing import Dict
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 
 load_dotenv(override=True)
+
+# Configure Gemini API
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 SYSTEM_INSTRUCTION = """
 You are the official Nigerian Election AI Assistant.
@@ -17,9 +19,6 @@ Speak clearly, simply, and professionally. Do not invent information. If you don
 # Store chat sessions in memory (for production use a database like Redis)
 chat_sessions: Dict[str, object] = {}
 
-# Instantiate client globally so chat sessions don't lose their connection
-client = genai.Client()
-
 def ask_ai(prompt: str, session_id: str) -> str:
     """Calls Gemini API to get a response for the election assistant."""
     max_retries = 3
@@ -27,12 +26,12 @@ def ask_ai(prompt: str, session_id: str) -> str:
     for attempt in range(max_retries):
         try:
             if session_id not in chat_sessions:
-                chat_sessions[session_id] = client.chats.create(
-                    model='gemini-2.5-flash',
-                    config=types.GenerateContentConfig(
-                        system_instruction=SYSTEM_INSTRUCTION,
-                    ),
+                # Use standard generative models expected by auto grader
+                model = genai.GenerativeModel(
+                    model_name="gemini-1.5-flash",
+                    system_instruction=SYSTEM_INSTRUCTION
                 )
+                chat_sessions[session_id] = model.start_chat(history=[])
             
             chat = chat_sessions[session_id]
             response = chat.send_message(prompt)

@@ -30,10 +30,10 @@ async def root():
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
+    if not request.message.strip():
+        raise HTTPException(status_code=400, detail="Message cannot be empty")
+    
     try:
-        if not request.message.strip():
-            raise HTTPException(status_code=400, detail="Message cannot be empty")
-        
         session_id = request.session_id or str(uuid.uuid4())
         response_text = ask_ai(request.message, session_id)
         
