@@ -21,7 +21,7 @@ The solution is designed with a **"Clean & Constrained"** logic model:
 ### 3. How the Solution Works
 - **Frontend Layer:** A dark-themed web interface captures user queries and displays real-time typing indicators. It communicates via async `fetch` requests to a REST API.
 - **Backend Layer:** A Python-based `FastAPI` server processes the incoming requests and maintains in-memory conversation history sessions.
-- **Google Services Integration:** The backend securely routes the query to Google's `gemini-2.5-flash` model using the latest `google-genai` SDK.
+- **Google Services Integration:** The backend securely routes the query to Google's `gemini-1.5-flash` model using the `google-generativeai` SDK.
 - **Deployment:** The entire application is containerized using Docker and deployed as a serverless web app on **Google Cloud Run**, ensuring it can scale from zero to millions of users automatically.
 
 ### 4. Assumptions Made
@@ -35,16 +35,17 @@ This application not only meets the requirements but exceeds them by handling ed
 ---
 
 ## 🚀 Features
-- **Intelligent Assistant:** Powered by the latest `gemini-2.5-flash` model via the `google-genai` SDK.
+- **Intelligent Assistant:** Powered by the `gemini-1.5-flash` model via the `google-generativeai` SDK.
 - **Contextual Memory:** Maintains session-based chat history, allowing the AI to remember the context of your ongoing conversation.
 - **Premium User Interface:** Custom, dark-themed vanilla JavaScript frontend featuring glassmorphism, auto-resizing text inputs, and smooth micro-animations.
 - **Robust Error Handling:** Features exponential backoff retry logic and gracefully handles API rate limits without crashing the server.
+- **Automated Testing:** Includes a `pytest` suite for validating FastAPI endpoint logic and ensuring high code quality.
 - **Cloud-Native Deployment:** Fully Dockerized for Google Cloud Run.
 
 ## 🛠️ Tech Stack
 - **Frontend:** Vanilla HTML5, CSS3, JavaScript
-- **Backend:** Python, FastAPI, Uvicorn
-- **AI Integration:** Google Gemini API (`google-genai`)
+- **Backend:** Python, FastAPI, Uvicorn, Pytest
+- **AI Integration:** Google Gemini API (`google-generativeai`)
 - **Containerization:** Docker
 - **Cloud Platform:** Google Cloud Run
 
@@ -80,7 +81,13 @@ This application not only meets the requirements but exceeds them by handling ed
    uvicorn app.main:app --reload
    ```
 
-5. **Access the App**
+5. **Run the Tests**
+   You can run the automated test suite to ensure the API works correctly:
+   ```bash
+   pytest
+   ```
+
+6. **Access the App**
    Open your browser and navigate to `http://localhost:8000`
 
 ## 🐳 Docker Deployment

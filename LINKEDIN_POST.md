@@ -5,8 +5,9 @@ I'm incredibly excited to share **NaijaVote AI**, a production-ready web applica
 At its core, it's designed to be an accessible, lightning-fast guide for voter registration, polling unit verification, and civic responsibilities. But what I'm most proud of is the architecture running under the hood.
 
 Here are a few technical highlights from the build:
-✅ **AI Integration & Context Memory:** Powered by Google's `gemini-2.5-flash` model via a `FastAPI` backend. I engineered a session-based memory system so the AI dynamically remembers the context of your ongoing conversation.
+✅ **AI Integration & Context Memory:** Powered by Google's `gemini-1.5-flash` model via a `FastAPI` backend. I engineered a session-based memory system so the AI dynamically remembers the context of your ongoing conversation.
 ✅ **Robust Exception Handling:** AI APIs inevitably experience traffic spikes and rate limits (like `503` or `429` errors). Instead of crashing, the backend implements an **exponential backoff retry mechanism** to automatically recover from temporary outages. If limits persist, it degrades gracefully to keep the user experience seamless.
+✅ **Automated Testing:** Integrated a comprehensive `pytest` test suite to validate REST endpoints, improving testing metrics and guaranteeing production stability.
 ✅ **Premium Vanilla UI:** Completely bypassed heavy frontend frameworks to build a custom, glassmorphism UI using purely Vanilla JavaScript and CSS. Complete with smooth micro-animations and an auto-resizing text interface.
 ✅ **Cloud-Native:** The entire stack is containerized with Docker and deployed serverless on **Google Cloud Run**, allowing it to scale securely from zero to thousands of users.
 
