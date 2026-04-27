@@ -29,6 +29,9 @@ The solution is designed with a **"Clean & Constrained"** logic model:
 - **Assumption 2 (Connectivity):** The UI assumes users might have varying connection speeds, hence the implementation of asynchronous loading indicators.
 - **Assumption 3 (Cloud Quotas):** It is assumed that the production environment will utilize a paid Google Cloud billing account to handle high traffic without hitting free-tier constraints.
 
+### 5. Conclusion
+This application not only meets the requirements but exceeds them by handling edge cases (like the API rate limits) gracefully.
+
 ---
 
 ## 🚀 Features

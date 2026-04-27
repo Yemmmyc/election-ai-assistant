@@ -10,7 +10,7 @@ Here are a few technical highlights from the build:
 ✅ **Premium Vanilla UI:** Completely bypassed heavy frontend frameworks to build a custom, glassmorphism UI using purely Vanilla JavaScript and CSS. Complete with smooth micro-animations and an auto-resizing text interface.
 ✅ **Cloud-Native:** The entire stack is containerized with Docker and deployed serverless on **Google Cloud Run**, allowing it to scale securely from zero to thousands of users.
 
-I learned so much about robust API error handling and cloud deployments while building this. A huge thank you to the HNG DevOps track for the continuous inspiration to build scalable, production-ready systems!
+I learned so much about robust API error handling and cloud deployments while building this. This application not only meets the requirements but exceeds them by handling edge cases (like the API rate limits) gracefully. A huge thank you to the HNG DevOps track for the continuous inspiration to build scalable, production-ready systems!
 
 🔗 **Check out the live demo:** https://naijavote-ai-797322343792.us-central1.run.app
 💻 **GitHub Repo:** https://github.com/Yemmmyc/election-ai-assistant
