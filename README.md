@@ -15,7 +15,7 @@ The mission of this project is to create an interactive AI assistant that helps 
 ### 2. Approach and Logic
 The solution is designed with a **"Clean & Constrained"** logic model:
 - **System Instructions:** The Gemini API is strictly instructed to adopt the persona of a neutral, official Nigerian Election Assistant. This constrains the AI from answering non-civic questions and ensures the information remains focused and relevant to the user context.
-- **Robust Fallbacks:** Recognizing that AI models face rate limits, the backend logic explicitly catches `429 RESOURCE_EXHAUSTED` errors from the Gemini API and serves a graceful fallback message, preventing server crashes and ensuring a smooth user experience.
+- **Robust Fallbacks & Exception Handling:** AI models often face rate limits and traffic spikes (e.g., 503 UNAVAILABLE or 429 RESOURCE_EXHAUSTED exceptions). The backend features an exponential backoff retry mechanism to automatically recover from temporary outages. If the quota limit persists, it serves a graceful fallback message, preventing server crashes and ensuring a seamless user experience.
 - **Premium User Experience:** The frontend logic completely bypasses heavy frameworks in favor of high-performance Vanilla JavaScript and CSS glassmorphism, ensuring accessibility and extremely fast load times.
 
 ### 3. How the Solution Works
